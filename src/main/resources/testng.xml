@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Practice9">
+    <test name="chrome">
+        <classes>
+            <class name="practice9.tests.chrome.CalculatorTest" />
+            <class name="practice9.tests.chrome.VotingTest" />
+        </classes>
+    </test>
+    <test name="firefox">
+        <classes>
+            <class name="practice9.tests.firefox.CrossBrowserTest" />
+        </classes>
+    </test>
+</suite>
