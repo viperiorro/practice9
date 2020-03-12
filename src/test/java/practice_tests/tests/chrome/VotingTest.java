@@ -1,49 +1,52 @@
-package practice9.tests.chrome;
+package practice_tests.tests.chrome;
 
 import com.codeborne.selenide.Condition;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import io.qameta.allure.Story;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import pages.voting.VotingPage;
 import pages.voting.VotingResultPage;
 
 import static com.codeborne.selenide.Selenide.open;
 import static data.Data.numberOfMembers;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class VotingTest extends BaseTest {
 
-    private VotingPage votingPage;
-    private VotingResultPage resultPage;
+    private static VotingPage votingPage;
+    private static VotingResultPage resultPage;
 
-    @BeforeClass
-    public void init() {
+    @BeforeAll
+    public static void init() {
         baseUrl = props.getProperty("voting.url");
 
         votingPage = new VotingPage();
         resultPage = new VotingResultPage();
     }
 
-    @BeforeMethod
+    @BeforeEach
     public void openHomePage() {
         open(baseUrl);
     }
 
-    @Test()
+    @Story("sd")
+    @Test
     public void checkAdditionMember() {
         votingPage.addMember("Bob");
         numberOfMembers++;
 
-        Assert.assertEquals(resultPage.getNumberOfMembersInFirstSport().text(), numberOfMembers.toString());
+        assertEquals(resultPage.getNumberOfMembersInFirstSport().text(), numberOfMembers.toString());
     }
 
+    @Story("sd")
     @Test
     public void checkNumberOfMembers() {
         votingPage.addMember("Jon");
         numberOfMembers++;
 
-        Assert.assertTrue(resultPage.getNumberOfMembersInFirstSport().text().contains(numberOfMembers.toString()));
+        assertTrue(resultPage.getNumberOfMembersInFirstSport().text().contains(numberOfMembers.toString()));
     }
 
     @Test
@@ -64,7 +67,7 @@ public class VotingTest extends BaseTest {
         votingPage.addMember("check2");
         numberOfMembers++;
 
-        Assert.assertTrue(resultPage.getNamesInFirstSport().text().contains("check1") &&
+        assertTrue(resultPage.getNamesInFirstSport().text().contains("check1") &&
                         resultPage.getNamesInFirstSport().getText().contains("check2"));
     }
 }

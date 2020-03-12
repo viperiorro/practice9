@@ -1,9 +1,9 @@
-package practice9.tests.chrome;
+package practice_tests.tests.chrome;
 
 import com.codeborne.selenide.Configuration;
 import config.ResourcesReader;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import selenoid_support.SelenoidChromeDriverProvider;
 import utils.Constants;
 
@@ -18,20 +18,21 @@ public class BaseTest {
     protected static ResourcesReader resourcesReader = new ResourcesReader();
     protected static Properties props = resourcesReader.loadPropertiesFile(constants.getFILE_PATH());
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         Configuration.startMaximized = true;
 
         //setup local or remote (via selenoid) browser
-        if (props.getProperty("browser.remote").equals("true")) {
-            Configuration.browser = SelenoidChromeDriverProvider.class.getName();
-        } else {
-            Configuration.browser = props.getProperty("browser.type1");
-        }
+//        if (props.getProperty("browser.remote").equals("true")) {
+//            Configuration.browser = SelenoidChromeDriverProvider.class.getName();
+//        } else {
+//            Configuration.browser = props.getProperty("browser.type1");
+//        }
+        Configuration.browser = SelenoidChromeDriverProvider.class.getName();
     }
 
-    @AfterMethod
-    public void close() {
+    @AfterAll
+    public static void close() {
         closeWebDriver();
     }
 }

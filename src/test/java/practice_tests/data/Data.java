@@ -1,4 +1,4 @@
-package practice9.data;
+package practice_tests.data;
 
 public class Data {
 

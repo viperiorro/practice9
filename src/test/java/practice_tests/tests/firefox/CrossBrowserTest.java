@@ -1,10 +1,10 @@
-package practice9.tests.firefox;
+package practice_tests.tests.firefox;
 
 import com.codeborne.selenide.Configuration;
 import config.ResourcesReader;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import pages.voting.VotingPage;
 import pages.voting.VotingResultPage;
 import selenoid_support.SelenoidGeckoDriverProvider;
@@ -24,19 +24,20 @@ public class CrossBrowserTest {
     protected static Constants constants = new Constants();
     protected static Properties props = resourcesReader.loadPropertiesFile(constants.getFILE_PATH());
 
-    private VotingPage votingPage;
-    private VotingResultPage votingResultPage;
+    private static VotingPage votingPage;
+    private static VotingResultPage votingResultPage;
 
-    @BeforeClass
-    public void setUp() {
+    @BeforeAll
+    public static void setUp() {
         Configuration.startMaximized = true;
 
-        //setup local or remote (via selenoid) browser
-        if (props.getProperty("browser.remote").equals("true")) {
-            Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
-        } else {
-            Configuration.browser = props.getProperty("browser.type2");
-        }
+//        //setup local or remote (via selenoid) browser
+//        if (props.getProperty("browser.remote").equals("true")) {
+//            Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
+//        } else {
+//            Configuration.browser = props.getProperty("browser.type2");
+//        }
+        Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
 
         baseUrl = props.getProperty("voting.url");
 
@@ -53,8 +54,8 @@ public class CrossBrowserTest {
         votingResultPage.getNumberOfMembersInFirstSport().shouldHave(text(numberOfMembers.toString()));
     }
 
-    @AfterMethod
-    public void close() {
+    @AfterAll
+    public static void close() {
         closeWebDriver();
     }
 }
