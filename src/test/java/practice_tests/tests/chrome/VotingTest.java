@@ -31,7 +31,6 @@ public class VotingTest extends BaseTest {
         open(baseUrl);
     }
 
-    @Story("sd")
     @Test
     public void checkAdditionMember() {
         votingPage.addMember("Bob");
@@ -40,7 +39,6 @@ public class VotingTest extends BaseTest {
         assertEquals(resultPage.getNumberOfMembersInFirstSport().text(), numberOfMembers.toString());
     }
 
-    @Story("sd")
     @Test
     public void checkNumberOfMembers() {
         votingPage.addMember("Jon");

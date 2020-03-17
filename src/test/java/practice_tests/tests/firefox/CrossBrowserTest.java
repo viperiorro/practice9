@@ -31,13 +31,11 @@ public class CrossBrowserTest {
     public static void setUp() {
         Configuration.startMaximized = true;
 
-//        //setup local or remote (via selenoid) browser
-//        if (props.getProperty("browser.remote").equals("true")) {
-//            Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
-//        } else {
-//            Configuration.browser = props.getProperty("browser.type2");
-//        }
-        Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
+        if (props.getProperty("browser.remote").equals("true")) {
+            Configuration.browser = SelenoidGeckoDriverProvider.class.getName();
+        } else {
+            Configuration.browser = props.getProperty("browser.type2");
+        }
 
         baseUrl = props.getProperty("voting.url");
 

@@ -22,13 +22,11 @@ public class BaseTest {
     public static void setUp() {
         Configuration.startMaximized = true;
 
-        //setup local or remote (via selenoid) browser
-//        if (props.getProperty("browser.remote").equals("true")) {
-//            Configuration.browser = SelenoidChromeDriverProvider.class.getName();
-//        } else {
-//            Configuration.browser = props.getProperty("browser.type1");
-//        }
-        Configuration.browser = SelenoidChromeDriverProvider.class.getName();
+        if (props.getProperty("browser.remote").equals("true")) {
+            Configuration.browser = SelenoidChromeDriverProvider.class.getName();
+        } else {
+            Configuration.browser = props.getProperty("browser.type1");
+        }
     }
 
     @AfterAll

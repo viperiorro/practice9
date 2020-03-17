@@ -33,9 +33,13 @@ public class CalculatorTest extends BaseTest {
     static Stream<Arguments> positiveTestProvider() {
         return Stream.of(
                 arguments("2", "3", ADDITION, "5"),
-                arguments("-5", "-7", ADDITION, "-12"),
+                arguments("22", "66", ADDITION, "88"),
+                arguments("100000", "45678", ADDITION, "145678"),
+                arguments("-576", "-4", ADDITION, "-580"),
                 arguments("7", "3", SUBTRACTION, "4"),
-                arguments("-12", "3", SUBTRACTION, "-15")
+                arguments("50", "35", SUBTRACTION, "15"),
+                arguments("100000", "45000", SUBTRACTION, "55000"),
+                arguments("-456", "-5", SUBTRACTION, "-451")
         );
     }
 
@@ -47,22 +51,22 @@ public class CalculatorTest extends BaseTest {
         resultPage.getCalculationResult().shouldHave(text(expectedResult));
     }
 
-    static Stream<Arguments> negativeTestProvider() {
-        return Stream.of(
-                arguments("", "", ADDITION),
-                arguments("", "3", ADDITION),
-                arguments("-5", "", ADDITION),
-                arguments("", "", SUBTRACTION),
-                arguments("", "3", SUBTRACTION),
-                arguments("-5", "", SUBTRACTION)
-        );
-    }
-
-    @ParameterizedTest(name = "{0} {2} {1} = error")
-    @MethodSource("negativeTestProvider")
-    public void checkCalculationWithPositiveParameters(String x, String y, String operation) {
-        calculatorPage.calculate(x, y, operation);
-
-        resultPage.getCalculationResult().shouldHave(text(INVALID_OPERAND_RESULT));
-    }
+//    static Stream<Arguments> negativeTestProvider() {
+//        return Stream.of(
+//                arguments("", "", ADDITION),
+//                arguments("", "3", ADDITION),
+//                arguments("-5", "", ADDITION),
+//                arguments("", "", SUBTRACTION),
+//                arguments("", "3", SUBTRACTION),
+//                arguments("-5", "", SUBTRACTION)
+//        );
+//    }
+//
+//    @ParameterizedTest(name = "{0} {2} {1} = error")
+//    @MethodSource("negativeTestProvider")
+//    public void checkCalculationWithPositiveParameters(String x, String y, String operation) {
+//        calculatorPage.calculate(x, y, operation);
+//
+//        resultPage.getCalculationResult().shouldHave(text(INVALID_OPERAND_RESULT));
+//    }
 }
